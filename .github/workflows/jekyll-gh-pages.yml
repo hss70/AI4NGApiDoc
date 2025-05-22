@@ -39,6 +39,9 @@ jobs:
         with:
           node-version: 18
 
+      - name: Show folder contents
+        run: ls -R .
+
       - name: Generate apis.json
         run: node .github/scripts/generate-apis-json.js
 
