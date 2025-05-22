@@ -28,13 +28,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Setup Node.js (for generating apis.json)
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+
+      - name: Generate apis.json
+        run: node .github/scripts/generate-apis-json.js
+
       - name: Setup Pages
         uses: actions/configure-pages@v5
+
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
           source: ./
           destination: ./_site
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
 
