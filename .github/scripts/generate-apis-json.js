@@ -3,6 +3,17 @@
 const fs = require('fs');
 const path = require('path');
 
+console.log(__dirname)
+fs.readdir(__dirname, (err, files) => {
+  if (err) {
+    console.error('Failed to read directory', err);
+    process.exit(1);
+  }
+
+  files.forEach(file => {
+    console.log(file);
+  });
+});
 const apiDir = path.join(__dirname, '../../Apis');
 console.log('API Directory:', apiDir);
 const output = path.join(apiDir, 'apis.json');
