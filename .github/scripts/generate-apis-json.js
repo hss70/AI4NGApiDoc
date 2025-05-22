@@ -13,7 +13,10 @@ fs.readdir(apiDir, (err, files) => {
     process.exit(1);
   }
 
+  console.log('📄 Files in apis directory:', files);
+
   const yamlFiles = files.filter(f => f.endsWith('.yaml') || f.endsWith('.yml'));
+  console.log('✅ YAML files found:', yamlFiles);
 
   fs.writeFileSync(output, JSON.stringify(yamlFiles, null, 2));
   console.log('✅ apis.json generated');

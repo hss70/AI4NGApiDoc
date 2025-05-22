@@ -39,6 +39,9 @@ jobs:
         with:
           node-version: 18
 
+      - name: List files in apis/ before generating
+        run: ls -l apis
+
       - name: Generate apis.json
         run: node .github/scripts/generate-apis-json.js
 
