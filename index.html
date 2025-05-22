@@ -26,25 +26,36 @@
      let ui;
 
     function initSwaggerUI(url) {
-      ui = SwaggerUIBundle({
-        url: url,
-        dom_id: '#swagger-ui',
-        deepLinking: true,
-        presets: [
-          SwaggerUIBundle.presets.apis,
-          SwaggerUIStandalonePreset
-        ],
-        plugins: [
-          SwaggerUIBundle.plugins.DownloadUrl
-        ],
-        layout: "StandaloneLayout",
-        filter: false
-      });
-    }
+      ui = SwaggerUIBundle(
+        {
+          url: url,
+          dom_id: '#swagger-ui',
+          deepLinking: true,
+          presets: 
+          [
+            SwaggerUIBundle.presets.apis,
+            SwaggerUIStandalonePreset
+          ],
+          plugins: 
+          [
+            SwaggerUIBundle.plugins.DownloadUrl
+          ],
+          layout: "StandaloneLayout",
+          filter: false,
+          // ✅ This runs after Swagger UI is fully rendered
+          onComplete: () => 
+          {
+            const input = document.getElementById('download-url-input');
+            if (input) 
+            {
+              input.setAttribute('disabled', 'true');
+            }
+          },
+        });}
 
     function switchSpec() {
       const selected = document.getElementById('apiSelector').value;
-      const specUrl = './assets/Apis/' + selected;
+      const specUrl = selected;
 
       // Just reload the page with a new URL param (simplest method)
       location.href = `?spec=${specUrl}`;
@@ -54,7 +65,7 @@
         fetch('./Apis/apis.json')
               .then(res => res.json())
               .then(specs => {
-                const dropdown = document.getElementById('custom-api-dropdown');
+                const dropdown = document.getElementById('apiSelector');
                 specs.forEach(spec => {
                   const option = document.createElement('option');
                   option.value = spec;
@@ -66,9 +77,9 @@
       const specFile = urlParams.get('spec') || 'classifierSwagger.yaml';
       initSwaggerUI('./Apis/' + specFile);
       document.getElementById('apiSelector').value = specFile;
-      document.getElementById('download-url-input').setAttribute('disabled', 'true');
             });
     };
+    
   </script>
 
 
