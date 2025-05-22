@@ -44,10 +44,10 @@
 
     function switchSpec() {
       const selected = document.getElementById('apiSelector').value;
-      const specUrl = './Apis/' + selected;
+      const specUrl = './assets/Apis/' + selected;
 
       // Just reload the page with a new URL param (simplest method)
-      location.href = `?spec=${selected}`;
+      location.href = `?spec=${specUrl}`;
     }
 
     window.onload = function () {

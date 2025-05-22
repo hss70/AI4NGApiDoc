@@ -3,14 +3,17 @@
 const fs = require('fs');
 const path = require('path');
 
-const apiDir = path.join(__dirname, '../../Apis');
-const output = path.join(__dirname, '../../Apis/apis.json');
+const apiDir = path.join(__dirname, '../../assets/Apis');
+const output = path.join(apiDir, 'apis.json');
 
 fs.readdir(apiDir, (err, files) => {
-  if (err) throw err;
+  if (err) {
+    console.error('Failed to read API directory', err);
+    process.exit(1);
+  }
 
   const yamlFiles = files.filter(f => f.endsWith('.yaml') || f.endsWith('.yml'));
 
   fs.writeFileSync(output, JSON.stringify(yamlFiles, null, 2));
-  console.log(`✅ Generated apis.json with ${yamlFiles.length} entries.`);
+  console.log('✅ apis.json generated');
 });
