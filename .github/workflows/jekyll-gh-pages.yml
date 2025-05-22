@@ -40,11 +40,6 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Pre-copy static files
-        run: |
-          mkdir -p _site
-          cp -R ./Apis ./_site/
-
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
         with:
