@@ -42,11 +42,11 @@ jobs:
       - name: List files in apis/ before generating
         run: ls -l apis
 
-      - name: Generate apis.json
-        run: node .github/scripts/generate-apis-json.js
-
       - name: Copy apis to _site
         run: cp -r apis _site/apis
+
+      - name: Generate apis.json
+        run: node .github/scripts/generate-apis-json.js
 
       - name: Confirm apis.json is copied
         run: ls -l _site/apis && cat _site/apis/apis.json

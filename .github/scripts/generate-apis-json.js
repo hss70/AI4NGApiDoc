@@ -1,11 +1,16 @@
-// This script generates a JSON file containing the list of YAML files in the Apis directory.
-// It reads the directory, filters for files with .yaml or .yml extensions, and writes the list to apis.json.
 const fs = require('fs');
 const path = require('path');
 
+// Output directly into _site/apis
+const outputDir = path.join(__dirname, '../../_site/apis');
+const output = path.join(outputDir, 'apis.json');
+
+// Ensure output directory exists
+fs.mkdirSync(outputDir, { recursive: true });
+
+// Scan original YAML directory
 const apiDir = path.join(__dirname, '../../apis');
 console.log('API Directory:', apiDir);
-const output = path.join(apiDir, 'apis.json');
 
 fs.readdir(apiDir, (err, files) => {
   if (err) {
@@ -13,11 +18,8 @@ fs.readdir(apiDir, (err, files) => {
     process.exit(1);
   }
 
-  console.log('📄 Files in apis directory:', files);
-
   const yamlFiles = files.filter(f => f.endsWith('.yaml') || f.endsWith('.yml'));
-  console.log('✅ YAML files found:', yamlFiles);
 
   fs.writeFileSync(output, JSON.stringify(yamlFiles, null, 2));
-  console.log('✅ apis.json generated');
+  console.log(`✅ apis.json written to ${output}`);
 });
