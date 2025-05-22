@@ -39,14 +39,11 @@ jobs:
         with:
           node-version: 18
 
-      - name: Show folder contents
-        run: ls -R .
-
       - name: Generate apis.json
         run: node .github/scripts/generate-apis-json.js
 
       - name: Copy Apis into _site
-        run: cp -r Apis _site/Apis
+        run: cp -r apis _site/apis
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
