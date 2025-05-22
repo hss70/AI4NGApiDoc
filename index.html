@@ -11,9 +11,81 @@
   </head>
 
   <body>
+  <!-- Dropdown for selecting YAML specs -->
+  <div style="margin: 10px;">
+    <label for="apiSelector">Select API:</label>
+    <select id="apiSelector" onchange="switchSpec()">
+    </select>
+  </div>
+
     <div id="swagger-ui"></div>
     <script src="./swagger-ui-bundle.js" charset="UTF-8"> </script>
     <script src="./swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
     <script src="./swagger-initializer.js" charset="UTF-8"> </script>
+     <script>
+     let ui;
+
+    function initSwaggerUI(url) {
+      ui = SwaggerUIBundle({
+        url: url,
+        dom_id: '#swagger-ui',
+        deepLinking: true,
+        presets: [
+          SwaggerUIBundle.presets.apis,
+          SwaggerUIStandalonePreset
+        ],
+        plugins: [
+          SwaggerUIBundle.plugins.DownloadUrl
+        ],
+        layout: "StandaloneLayout",
+        filter: false
+      });
+    }
+
+    function switchSpec() {
+      const selected = document.getElementById('apiSelector').value;
+      const specUrl = './Apis/' + selected;
+
+      // Just reload the page with a new URL param (simplest method)
+      location.href = `?spec=${selected}`;
+    }
+
+    window.onload = function () {
+        fetch('./Apis/apis.json')
+              .then(res => res.json())
+              .then(specs => {
+                const dropdown = document.getElementById('custom-api-dropdown');
+                specs.forEach(spec => {
+                  const option = document.createElement('option');
+                  option.value = spec;
+                  option.textContent = spec.replace('.yaml', '');
+                  dropdown.appendChild(option);
+                });
+
+      const urlParams = new URLSearchParams(window.location.search);
+      const specFile = urlParams.get('spec') || 'classifierSwagger.yaml';
+      initSwaggerUI('./Apis/' + specFile);
+      document.getElementById('apiSelector').value = specFile;
+      document.getElementById('download-url-input').setAttribute('disabled', 'true');
+            });
+    };
+  </script>
+
+
+  <style>
+  .topbar .filter {
+    display: none !important;
+  }
+
+  /* Position your custom dropdown in the same place */
+  #custom-api-dropdown {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    z-index: 1000;
+    padding: 4px 8px;
+    font-size: 14px;
+  }
+</style>
   </body>
 </html>
