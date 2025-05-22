@@ -4,6 +4,7 @@ const fs = require('fs');
 const path = require('path');
 
 const apiDir = path.join(__dirname, '../../Apis');
+console.log('API Directory:', apiDir);
 const output = path.join(apiDir, 'apis.json');
 
 fs.readdir(apiDir, (err, files) => {
