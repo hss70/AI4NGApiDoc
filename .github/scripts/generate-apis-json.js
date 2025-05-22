@@ -3,7 +3,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const apiDir = path.join(__dirname, '../../assets/Apis');
+const apiDir = path.join(__dirname, '../../Apis');
 const output = path.join(apiDir, 'apis.json');
 
 fs.readdir(apiDir, (err, files) => {
