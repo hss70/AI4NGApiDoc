@@ -6,6 +6,6 @@ include:
 
 defaults:
   - scope:
-      path: "Apis"
+      path: "apis"
     values:
       sitemap: false

@@ -14,7 +14,7 @@ fs.readdir(__dirname, (err, files) => {
     console.log(file);
   });
 });
-const apiDir = path.join(__dirname, '../../Apis');
+const apiDir = path.join(__dirname, '../../apis');
 console.log('API Directory:', apiDir);
 const output = path.join(apiDir, 'apis.json');
 

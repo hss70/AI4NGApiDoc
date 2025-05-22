@@ -62,7 +62,7 @@
     }
 
     window.onload = function () {
-        fetch('./Apis/apis.json')
+        fetch('./apis/apis.json')
               .then(res => res.json())
               .then(specs => {
                 const dropdown = document.getElementById('apiSelector');
@@ -75,7 +75,7 @@
 
       const urlParams = new URLSearchParams(window.location.search);
       const specFile = urlParams.get('spec') || 'classifierSwagger.yaml';
-      initSwaggerUI('./Apis/' + specFile);
+      initSwaggerUI('./apis/' + specFile);
       document.getElementById('apiSelector').value = specFile;
             });
     };
