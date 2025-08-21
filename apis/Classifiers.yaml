@@ -307,6 +307,9 @@ components:
         name:
           type: string
           nullable: true
+        data:
+          type: string
+          nullable: true
       additionalProperties: false
     Parameters:
       type: object
@@ -319,6 +322,9 @@ components:
           items:
             type: number
             format: float
+          nullable: true
+        fullCfJson:
+          type: string
           nullable: true
       additionalProperties: false
     ProblemDetails:
