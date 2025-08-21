@@ -271,7 +271,7 @@ components:
       properties:
         classifierId:
           type: integer
-          format: int32
+          format: int64
         status:
           type: string
           nullable: true
@@ -283,7 +283,7 @@ components:
           format: date-time
         sessionId:
           type: integer
-          format: int32
+          format: int64
         sessionName:
           type: string
           nullable: true
