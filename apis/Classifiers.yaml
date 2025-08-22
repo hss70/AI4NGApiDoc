@@ -36,7 +36,7 @@ paths:
           required: true
           schema:
             type: integer
-            format: int32
+            format: int64
       responses:
         '200':
           description: OK
@@ -72,7 +72,7 @@ paths:
           required: true
           schema:
             type: integer
-            format: int32
+            format: int64
       responses:
         '200':
           description: OK
@@ -108,7 +108,7 @@ paths:
           required: true
           schema:
             type: integer
-            format: int32
+            format: int64
       responses:
         '200':
           description: OK
@@ -191,7 +191,7 @@ paths:
           required: true
           schema:
             type: integer
-            format: int32
+            format: int64
         - name: graphName
           in: path
           required: true
@@ -327,6 +327,7 @@ components:
           type: string
           nullable: true
       additionalProperties: false
+      description: Parameters for the classifier
     ProblemDetails:
       type: object
       properties:
