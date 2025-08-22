@@ -98,48 +98,6 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/ProblemDetails'
-  '/api/classifiers/{classifierId}/graphs':
-    get:
-      tags:
-        - Classifiers
-      parameters:
-        - name: classifierId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-      responses:
-        '200':
-          description: OK
-          content:
-            text/plain:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Graph'
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Graph'
-            text/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Graph'
-        '404':
-          description: Not Found
-          content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-            text/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
   '/api/classifiers/session/{sessionId}/graphs':
     get:
       tags:
@@ -169,30 +127,12 @@ paths:
                 type: array
                 items:
                   $ref: '#/components/schemas/Graph'
-        '404':
-          description: Not Found
-          content:
-            text/plain:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-            text/json:
-              schema:
-                $ref: '#/components/schemas/ProblemDetails'
-  '/api/classifiers/{classifierId}/graphs/{graphName}':
+  '/api/classifiers/session/{sessionId}/graphdata':
     get:
       tags:
         - Classifiers
       parameters:
-        - name: classifierId
-          in: path
-          required: true
-          schema:
-            type: integer
-            format: int64
-        - name: graphName
+        - name: sessionId
           in: path
           required: true
           schema:
@@ -203,25 +143,48 @@ paths:
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/Graph'
+                type: array
+                items:
+                  $ref: '#/components/schemas/GraphData'
             application/json:
               schema:
-                $ref: '#/components/schemas/Graph'
+                type: array
+                items:
+                  $ref: '#/components/schemas/GraphData'
             text/json:
               schema:
-                $ref: '#/components/schemas/Graph'
-        '404':
-          description: Not Found
+                type: array
+                items:
+                  $ref: '#/components/schemas/GraphData'
+  '/api/classifiers/session/{sessionId}/graphnames':
+    get:
+      tags:
+        - Classifiers
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
           content:
             text/plain:
               schema:
-                $ref: '#/components/schemas/ProblemDetails'
+                type: array
+                items:
+                  type: string
             application/json:
               schema:
-                $ref: '#/components/schemas/ProblemDetails'
+                type: array
+                items:
+                  type: string
             text/json:
               schema:
-                $ref: '#/components/schemas/ProblemDetails'
+                type: array
+                items:
+                  type: string
   '/api/classifiers/session/{sessionId}/graphs/{graphName}':
     get:
       tags:
@@ -250,6 +213,46 @@ paths:
             text/json:
               schema:
                 $ref: '#/components/schemas/Graph'
+        '404':
+          description: Not Found
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/ProblemDetails'
+  '/api/classifiers/session/{sessionId}/graphdata/{graphName}':
+    get:
+      tags:
+        - Classifiers
+      parameters:
+        - name: sessionId
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: graphName
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: OK
+          content:
+            text/plain:
+              schema:
+                $ref: '#/components/schemas/GraphData'
+            application/json:
+              schema:
+                $ref: '#/components/schemas/GraphData'
+            text/json:
+              schema:
+                $ref: '#/components/schemas/GraphData'
         '404':
           description: Not Found
           content:
@@ -309,6 +312,15 @@ components:
           nullable: true
         data:
           type: string
+          nullable: true
+      additionalProperties: false
+    GraphData:
+      type: object
+      properties:
+        name:
+          type: string
+          nullable: true
+        data:
           nullable: true
       additionalProperties: false
     Parameters:
